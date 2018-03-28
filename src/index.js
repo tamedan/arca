@@ -9,7 +9,7 @@ const styles = {
 
 const App = () => (
   <div style={styles}>
-    <h2>arcanoid {"\u2728"}</h2>
+    <h2>sudoku {"\u2728"}</h2>
     <Layout />
   </div>
 );
