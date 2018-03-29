@@ -9,9 +9,9 @@ export default class Layout extends Component {
 
   componentWillMount() {
     let plane = [];
-    let num = 1;
+    // let num = 1;
 
-    for (let p = 0; p < 9; p++) {
+    for (let p = 0; p < 3; p++) {
       if (!plane[p]) {
         plane[p] = [];
       }
@@ -19,7 +19,8 @@ export default class Layout extends Component {
         if (!plane[p][i]) {
           plane[p][i] = [];
         }
-        for (let ind = 0; ind < 3; ind++) {
+        let num = 1;
+        for (let ind = 0; ind < 9; ind++) {
           if (!plane[p][i][ind]) {
             plane[p][i][ind] = [];
           }
@@ -36,6 +37,7 @@ export default class Layout extends Component {
   }
   render() {
     let plane = this.state.plane;
+    console.log("plane: ", plane);
     let position = this.state.position;
     let clickElement = this.clickElement;
     let motion = this.state.motion;
@@ -52,12 +54,19 @@ export default class Layout extends Component {
                 <div className={"layout_row row_" + i}>
                   {obj.map(function(cell, index) {
                     return (
-                      <input
-                        className={"col col_" + index + " s_" + cell}
+                      <div
+                        className={"col col_" + index}
                         ref={"col_" + index}
-                        value={cell}
                         onClick={clickElement}
-                      />
+                      >
+                        {cell.map(function(ob, inn) {
+                          return (
+                            <div className={"div_inner di_" + inn}>
+                              <input value={ob} />
+                            </div>
+                          );
+                        })}
+                      </div>
                     );
                   })}
                 </div>
