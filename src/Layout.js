@@ -5,6 +5,21 @@ export default class Layout extends Component {
     super(props);
     autoBind(this);
     this.state = {};
+    Array.prototype.shuffle = function(b) {
+      var i = this.length,
+        j,
+        t;
+      while (i) {
+        j = Math.floor(i-- * Math.random());
+        t =
+          b && typeof this[i].shuffle !== "undefined"
+            ? this[i].shuffle()
+            : this[i];
+        this[i] = this[j];
+        this[j] = t;
+      }
+      return this;
+    };
   }
 
   componentWillMount() {
@@ -34,6 +49,17 @@ export default class Layout extends Component {
       plane,
       motion: 0
     });
+  }
+
+  initPlane(plane) {
+    let defaultArr = JSON.parse(JSON.stringify(plane));
+    console.log("defaultArr: ", defaultArr);
+    let newPlane = [];
+    newPlane.push(plane[0].shuffle(true));
+    newPlane.push(plane[1].shuffle(true));
+    newPlane.push(plane[2].shuffle(true));
+    console.log("plane.shuffle: ", newPlane);
+    this.setState({ plane: newPlane });
   }
   render() {
     let plane = this.state.plane;
