@@ -103,12 +103,36 @@ export default class Layout extends Component {
       });
     }
   }
+  checkPlane(plane) {
+    let check = 0;
+    for (let i = 0; i < 3; i++) {
+      for (let n = 0; n < 3; n++) {
+        let sum = 0;
+        for (let m = 0; m < 9; m++) {
+          sum = sum + plane[i][n][m];
+          if (plane[i][n][m]) {
+            check++;
+            if (sum == 45) {
+              console.log("!!!!!!!!!!!!!! OK !!!!!!!!!!!!!!");
+            }
+            if (check === 81) {
+              console.log("############ OK #############");
+              // if (sum == 45) {
+              //   console.log("!!!!!!!!!!!!!! OK !!!!!!!!!!!!!!");
+              // }
+            }
+          }
+        }
+      }
+    }
+  }
   render() {
     let plane = this.state.plane;
     let changeElement = this.changeElement;
     console.log("plane: ", plane);
     let motion = this.state.motion;
     let qcolor = this.setColor;
+    let checkPlane = this.checkPlane(plane);
 
     return (
       <div className="layout">
