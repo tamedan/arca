@@ -60,12 +60,28 @@ export default class Layout extends Component {
     newPlane.push(plane[2].shuffle(true));
 
     console.log("plane.shuffle: ", newPlane);
-    this.checkRandomQuantity();
+    newPlane = this.setDifficulty(newPlane);
     this.setState({ plane: newPlane, defaultArr });
   }
   getRandomNumber(max, min) {
     let quantity = Math.floor(Math.random() * (max - min)) + min;
     return quantity;
+  }
+  setDifficulty() {
+    let quantity = this.getRandomNumber(6, 3);
+    let plane = this.state.plane;
+    console.log("setDifficulty - quantity: ", quantity);
+    console.log("setDifficulty - plane: ", plane);
+
+    for (let q = 0; q < 3; q++) {
+      for (let w = 0; w < 3; w++) {
+        for (let i = 0; i < quantity; i++) {
+          let position = this.getRandomNumber(9, 0);
+          plane[q][w][position] = 0;
+        }
+      }
+    }
+    return plane;
   }
   changeElement() {}
   render() {
