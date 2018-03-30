@@ -89,6 +89,9 @@ export default class Layout extends Component {
     let changeElement = this.changeElement;
     console.log("plane: ", plane);
     let motion = this.state.motion;
+    let qcolor = {
+      background: "#FFDAB9"
+    };
 
     return (
       <div className="layout">
@@ -106,7 +109,11 @@ export default class Layout extends Component {
                         {cell.map(function(ob, inn) {
                           return (
                             <div className={"div_inner di_" + inn}>
-                              <input value={ob} onChange={changeElement} />
+                              <input
+                                value={ob}
+                                onChange={changeElement}
+                                style={qcolor}
+                              />
                             </div>
                           );
                         })}
