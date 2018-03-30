@@ -68,7 +68,7 @@ export default class Layout extends Component {
     return quantity;
   }
   setDifficulty() {
-    let quantity = this.getRandomNumber(6, 3);
+    let quantity = this.getRandomNumber(9, 6);
     let plane = this.state.plane;
     console.log("setDifficulty - quantity: ", quantity);
     console.log("setDifficulty - plane: ", plane);
@@ -83,15 +83,32 @@ export default class Layout extends Component {
     }
     return plane;
   }
-  changeElement() {}
+  setColor(ob) {
+    if (ob === 0) {
+      return "zero";
+    }
+    return "normal";
+  }
+  changeElement(e) {
+    let plane = this.state.plane;
+    let element = Number(e.target.value);
+    let position = e.target.name.split(",");
+
+    if (element) {
+      console.log("%%%%%%%%% element: ", element);
+      console.log("%%%%%%%%% position: ", position);
+      plane[position[0]][position[1]][position[2]] = element;
+      this.setState({
+        plane
+      });
+    }
+  }
   render() {
     let plane = this.state.plane;
     let changeElement = this.changeElement;
     console.log("plane: ", plane);
     let motion = this.state.motion;
-    let qcolor = {
-      background: "#FFDAB9"
-    };
+    let qcolor = this.setColor;
 
     return (
       <div className="layout">
@@ -112,7 +129,8 @@ export default class Layout extends Component {
                               <input
                                 value={ob}
                                 onChange={changeElement}
-                                style={qcolor}
+                                className={qcolor(ob)}
+                                name={i + "," + index + "," + inn}
                               />
                             </div>
                           );
