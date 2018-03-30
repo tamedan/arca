@@ -58,14 +58,20 @@ export default class Layout extends Component {
     newPlane.push(plane[0].shuffle(true));
     newPlane.push(plane[1].shuffle(true));
     newPlane.push(plane[2].shuffle(true));
+
     console.log("plane.shuffle: ", newPlane);
-    this.setState({ plane: newPlane });
+    this.checkRandomQuantity();
+    this.setState({ plane: newPlane, defaultArr });
   }
+  getRandomNumber(max, min) {
+    let quantity = Math.floor(Math.random() * (max - min)) + min;
+    return quantity;
+  }
+  changeElement() {}
   render() {
     let plane = this.state.plane;
+    let changeElement = this.changeElement;
     console.log("plane: ", plane);
-    let position = this.state.position;
-    let clickElement = this.clickElement;
     let motion = this.state.motion;
 
     return (
@@ -80,15 +86,11 @@ export default class Layout extends Component {
                 <div className={"layout_row row_" + i}>
                   {obj.map(function(cell, index) {
                     return (
-                      <div
-                        className={"col col_" + index}
-                        ref={"col_" + index}
-                        onClick={clickElement}
-                      >
+                      <div className={"col col_" + index} ref={"col_" + index}>
                         {cell.map(function(ob, inn) {
                           return (
                             <div className={"div_inner di_" + inn}>
-                              <input value={ob} />
+                              <input value={ob} onChange={changeElement} />
                             </div>
                           );
                         })}
