@@ -95,8 +95,6 @@ export default class Layout extends Component {
     let position = e.target.name.split(",");
 
     if (element) {
-      console.log("%%%%%%%%% element: ", element);
-      console.log("%%%%%%%%% position: ", position);
       plane[position[0]][position[1]][position[2]] = element;
       this.setState({
         plane
@@ -113,13 +111,12 @@ export default class Layout extends Component {
           if (plane[i][n][m]) {
             check++;
             if (sum == 45) {
-              console.log("!!!!!!!!!!!!!! OK !!!!!!!!!!!!!!");
-            }
-            if (check === 81) {
-              console.log("############ OK #############");
-              // if (sum == 45) {
-              //   console.log("!!!!!!!!!!!!!! OK !!!!!!!!!!!!!!");
-              // }
+              //TODO доделать проверку сумм (45) по строчно по вертикали и горизонтали
+              for (let row = 0; row < 3; row++) {
+                for (let el = 0; el < 3; el++) {
+                  for (let rowel = 0; rowel < 3; rowel++) {}
+                }
+              }
             }
           }
         }
